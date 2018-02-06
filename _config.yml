@@ -5,7 +5,7 @@ paginate: 100 # it will paginate after this number
 language: 'en-uk'
 
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /jasper2/
+baseurl: /blogs/
 
 # Website info
 title: Ghost
@@ -66,13 +66,13 @@ feed:
 # or "master" otherwise
 safe: False
 lsi: False
-username: myJekyll
-repo: jasper2
+username: ovac
+repo: blogs
 branch: master
-relative_source: ../jasper2/
+relative_source: ../blogs/
 destination: ../jasper2-pages/
-production_url:  https://myJekyll.github.io/jasper2/
-source_url:  https://github.com/myJekyll/jasper2/
+production_url:  https://www.ovac4u.com/blogs/
+source_url:  https://github.com/ovac/blogs/
 
 exclude:
   - README.md
