@@ -291,7 +291,7 @@ header.main-header {
 	height:70px;
 	box-sizing:border-box;
 	background:#191919;
-	z-index:22;
+	z-index:101;
 	top:0;
 	left:0;
  	-webkit-transform: translate3d(0,0,0);

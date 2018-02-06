@@ -1,27 +1,25 @@
-<nav class="site-nav">
-    <div class="site-nav-left">
-        {% if page.current != 'home' %}
-            {% if site.logo %}
-                <a class="site-nav-logo" href="{{ site.url }}{{ site.baseurl }}"><img src="{{ site.baseurl}}{{ site.logo }}" alt="{{ site.title }}" /></a>
-            {% else %}
-                <a class="site-nav-logo" href="{{ site.url }}">{{ site.title }}</a>
-            {% endif %}
-        {% endif %}
-        {% if page.navigation %}
-            {% include navigation.html %}
-        {% endif %}
+<header class="main-header">
+    <a href="index.html" class="logo-holder"><img src="http://res.cloudinary.com/ovac/image/upload/v1517845930/238919685_7d0db432-084d-4185-8716-2c29eca1e626_x6cmp2.png" alt=""></a>
+    <!-- nav-button -->
+    <div class="nav-button-wrap">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <div class="site-nav-right">
-        <div class="social-links">
-            {% if site.facebook %}
-                <a class="social-link social-link-fb" href="https://facebook.com/{{ site.facebook }}" target="_blank" rel="noopener">{% include facebook.html %}</a>
-            {% endif %}
-            {% if site.twitter %}
-                <a class="social-link social-link-tw" href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener">{% include twitter.html %}</a>
-            {% endif %}
-        </div>
-        {% if site.subscribers %}
-            <a class="subscribe-button" href="#subscribe">Subscribe</a>
-        {% endif %}
+    <div class="nav-holder">
+        <nav class="scroll-nav">
+            <ul>
+                <li><a class="scroll-link" href="/#sec1">Home</a></li>
+                <li><a class="scroll-link" href="/#sec2">About</a></li>
+                <li><a class="scroll-link" href="/#sec6">Work</a></li>
+                <li><a class="scroll-link" href="/#sec7">Services</a></li>
+                <li><a class="scroll-link" href="/#sec8">Clients</a></li>
+                <li><a class="scroll-link" href="/#sec9">Contact</a></li>
+                <li><a class="scroll-link active" href="/blogs/">Articles</a></li>
+            </ul>
+        </nav>
     </div>
-</nav>
+    <div class="show-share isShare">
+      <i class="fa fa-pencil"></i><span>Documentation</span>
+    </div>
+</header>

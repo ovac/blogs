@@ -58,6 +58,7 @@ body {
 }
 
 .site-main {
+  /* Edited */
     z-index: 100;
     flex-grow: 1;
 }
@@ -107,8 +108,8 @@ body {
 
 .site-header {
     position: relative;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    /* padding-top: 12px;
+    padding-bottom: 12px; */
     color: #fff;
     background: color(var(--darkgrey) l(-5%)) no-repeat center center;
     background-size: cover;
@@ -545,6 +546,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full {
     position: relative;
+    /* Edited */
     z-index: 50;
 }
 /* ^ Required to make .post-full-content:before/after z-index stacking work */
