@@ -1,4 +1,4 @@
-martin:
+ovac4u:
   username: ovac4u
   name: Victor Ariama
   location: Accra, Ghana
@@ -6,6 +6,6 @@ martin:
   url: False
   bio: A Ghana based Nigerian fullstack developer.
   picture: assets/images/martin.jpg
-  facebook: False
-  twitter: False
-  cover: False
+  facebook: ovac4u
+  twitter: ovac4u
+  cover: assets/images/martin.jpg
