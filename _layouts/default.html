@@ -13,6 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
 
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css-plugin/jsinstagram.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css-plugin/vegas.css">
+
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/fonts/font-awesome/css/font-awesome.css">
 
     <link type="text/css" rel="stylesheet" href="{{ site.baseurl }}assets/built/plugins.css">
@@ -79,7 +82,7 @@
             <a class="subscribe-overlay-close" href="#"></a>
             <div class="subscribe-overlay-content">
                 {% if site.logo %}
-                    <img class="subscribe-overlay-logo" src="{{ site.baseurl }}{{ site.logo }}" alt="{{ site.title }}" />
+                    <img class="subscribe-overlay-logo" src="{% unless site.logo contains "https://" %}{{ site.baseurl }}{% endunless %}{{ site.logo }}" alt="{{ site.title }}" />
                 {% endif %}
                 <h1 class="subscribe-overlay-title">Subscribe to {{ site.title }}</h1>
                 <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
@@ -134,6 +137,61 @@
 
     <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
     <!-- ghost_foot -->
+
+    <script type="text/javascript" src="assets/js/vegas.js"></script>
+    <script type="text/javascript" src="assets/js/instafeed.js"></script>
+    <script>
+        $(document).ready(function() {
+            var cm = $(".nav-button-wrap");
+
+            cm.on("click", function() {
+               $('.nav-holder').slideToggle(500);
+
+               return false;
+            });
+
+            $(".nav-button-wrap").attr("onclick","return true");
+
+            var userid = 253601294,
+              access_token = "253601294.1677ed0.f92b1909bb5b47ed9d9a2f0718b86d7a",
+              count = 5;
+
+            var feed = new Instafeed({
+
+              mock: true,
+              get: 'user',
+              userId: userid,
+              sortBy: 'random',
+              accessToken: access_token,
+
+              success: function(response) {
+                var slides = response.data.map(function(obj) {
+                  var rObj = {};
+                  rObj["src"] = obj.images.standard_resolution.url;
+                  return rObj;
+                });
+
+                $('.site-header.outer').vegas({
+                  slides: slides,
+                  shuffle: true,
+                  transition: 'blur2',
+                  align: 'middle',
+                  overlay: 'assets/overlays/08.png'
+                });
+              }
+
+            });
+            feed.run();
+          });
+        </script>
+        <script src="assets/js/yourscript.js"></script>
+
+
+        <script
+          data-subdomain="ovac"
+          data-name="pushowl"
+          src="https://cdn.pushowl.com/static/cdn/widget.js">
+        </script>
 
 </body>
 </html>

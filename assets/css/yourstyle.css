@@ -55,3 +55,63 @@
 .site-main.outer {
   padding-top: 100px;
 }
+
+
+
+@media only screen and (max-width: 1064px){
+
+  header.main-header, .column-wrap {
+    width: 100%;
+  }
+
+  .nav-holder nav li a {
+      background: none !important;
+      padding: 10px 0 !important;
+      text-align: right;
+      float: left;
+  }
+
+  .show-share {
+      right: 0;
+  }
+
+  .nav-holder nav li {
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+}
+  .nav-holder li, .nav-holder nav li ul li {
+      width: 100%;
+      float: right;
+      text-align: right;
+  }
+  .nav-button-wrap {
+      position: absolute;
+      top: 27px;
+      right: 110px;
+      z-index: 104;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      display: block;
+  }
+
+  .nav-button-wrap span {
+    float: left;
+    width: 100%;
+    height: 2px;
+    margin-bottom: 6px;
+  }
+
+  .nav-holder {
+    display: none;
+    position: absolute;
+    top: 70px;
+    width: 350px;
+    right: 0;
+    margin-left: 0;
+    padding: 0 50px 30px;
+    background: #292929;
+    border-top: 1px solid rgba(255,255,255,0.21);
+  }
+}

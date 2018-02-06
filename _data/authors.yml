@@ -5,7 +5,7 @@ ovac4u:
   url_full: False
   url: False
   bio: A Ghana based Nigerian fullstack developer.
-  picture: assets/images/martin.jpg
+  picture: https://res.cloudinary.com/ovac/image/upload/h_300/v1504965794/aboust_ey5v1v.jpg
   facebook: ovac4u
   twitter: ovac4u
-  cover: assets/images/martin.jpg
+  cover: https://res.cloudinary.com/ovac/image/upload/h_600/v1504965794/aboust_ey5v1v.jpg

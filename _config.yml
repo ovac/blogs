@@ -8,29 +8,29 @@ language: 'en-uk'
 baseurl: /blogs/
 
 # Website info
-title: Ghost
-description: The professional publishing platform
-cover: assets/images/blog-cover.jpg
-logo: assets/images/blog-icon.png
-logo_dark: assets/images/favicon.png
+title: ovac4u
+description:
+cover: https://res.cloudinary.com/ovac/image/upload/h_600/v1504965794/aboust_ey5v1v.jpg
+logo: https://res.cloudinary.com/ovac/image/upload/v1517845930/238919685_7d0db432-084d-4185-8716-2c29eca1e626_x6cmp2.png
+logo_dark: https://res.cloudinary.com/ovac/image/upload/v1517845930/238919685_7d0db432-084d-4185-8716-2c29eca1e626_x6cmp2.png
 favicon: assets/images/favicon.png
-production_url: https://myJekyll.github.io/jasper2/
-source_url: https://github.com/myJekyll/jasper2/
+production_url: https://www.ovac4u.com/blogs/
+source_url: https://github.com/ovac/blogs/
 
 # Social info
 navigation: True # show the navbar links
 subscribers: True # you need to connect an external service for this to work,
 # if 'True' the submit button is disabled for now, but you can change that
 # by editing `_includes/subscribe-form.html`
-twitter: tryghost # replace by your username
-facebook: ghost # replace by your username
+twitter: ovac4u # replace by your username
+facebook: ovac4u # replace by your username
 
 # Disqus
-disqus: False
-disqus_shortname: myjekyll # replace with your disqus username
+disqus: True
+disqus_shortname: ovac4u # replace with your disqus username
 
 # Google Analytics
-google_analytics: UA-69281367-1 # replace with your GA tracking identifier
+google_analytics: UA-104991685-1 # replace with your GA tracking identifier
 
 # Permalinks
 permalink: /:title
@@ -84,4 +84,4 @@ exclude:
   - vendor
   - .travis.yml
   - node_modules
-  - .git 
+  - .git

@@ -42,7 +42,7 @@ into the {body} of the default.hbs template -->
             </header>
 
             {% if page.cover %}
-            <figure class="post-full-image" style="background-image: url({{ site.baseurl }}{{ page.cover }})">
+            <figure class="post-full-image" style="background-image: url({% unless page.cover contains "https://" %}{{ site.baseurl }}{% endunless %}{{ page.cover }})">
             </figure>
             {% endif %}
 
@@ -68,7 +68,7 @@ into the {body} of the default.hbs template -->
                     {% if author[1].username == page.author %}
                         <section class="author-card">
                             {% if author[1].picture %}
-                                <img class="author-profile-image" src="{{ site.baseurl }}{{ author[1].picture }}" alt="{{ page.author }}" />
+                                <img class="author-profile-image" src="{% unless author[1].picture contains "https://" %}{{ site.baseurl }}{% endunless %}{{ author[1].picture }}" alt="{{ page.author }}" />
                             {% endif %}
                             <section class="author-card-content">
                                 <h4 class="author-card-name"><a href="{{ site.baseurl }}author/{{ page.author }}">{{ author[1].name }}</a></h4>
@@ -130,10 +130,10 @@ into the {body} of the default.hbs template -->
                 {% if related_posts > 1 %}
                     <article class="read-next-card"
                         {% if site.cover %}
-                            style="background-image: url({{ site.baseurl }}{{ site.cover }})"
+                            style="background-image: url({% unless site.cover contains "https://" %}{{ site.baseurl }}{% endunless %}{{ site.cover }})"
                         {% else %}
                             {% if page.cover %}
-                                style="background-image: url(url({{ site.baseurl }}{{ page.cover }})"{% endif %}
+                                style="background-image: url({% unless page.cover contains "https://" %}{{ site.baseurl }}{% endunless %}{{ page.cover }})"{% endif %}
                         {% endif %}
                     >
                         <header class="read-next-card-header">
