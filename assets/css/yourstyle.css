@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*--
 	Add your style here
---*/ 
+--*/
 .menu-wrap {
         right:0 !important;
 	-webkit-transform: translate3d(320px,0,0);
@@ -19,4 +19,31 @@
 	right:0;
 	opacity:1;
 	visibility:visible;
+}
+
+.show-share {
+  position: absolute;
+  border-left: 1px solid rgba(255, 255, 255, .11);
+  right: -90px;
+  z-index: 10;
+  top: 0;
+  height: 70px;
+  width: 90px;
+  cursor: pointer;
+  background: #292929;
+  text-align: center;
+}
+
+.show-share i {
+  float: left;
+  width: 100%;
+  margin-top: 18px;
+  font-size: 16px;
+  padding-bottom: 8px;
+}
+
+.show-share span {
+  color: #fff;
+  font-size: 11px;
+  font-weight: bolder;
 }
