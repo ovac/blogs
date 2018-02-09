@@ -59,4 +59,4 @@ it is that simple.
 # Come back for other cases. I'll update this post and make it even more comprehensive before the end of the day.
 
 
-* You may also suggest other cases and solutions. I give full credits! Find typos or want to make corrections or add your contributions? Just send a pull request as this blog post is hosted [here on github using markdown](https://www.github.com/ovac/blogs/_posts/2018-02-09-multiple-views-from-one-laravel-controller.md)
+* You may also suggest other cases and solutions. I give full credits! Find typos or want to make corrections or add your contributions? Just send a pull request as this blog post is hosted [here on github using markdown](https://github.com/ovac/blogs/blob/master/_posts/2018-02-09-multiple-views-from-one-laravel-controller.md)
