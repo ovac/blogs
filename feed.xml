@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/blogs/feed.xml" rel="self" type="application/atom+xml" /><link href="/blogs/" rel="alternate" type="text/html" /><updated>2018-02-10T08:29:07+00:00</updated><id>/blogs/</id><title type="html">ovac4u</title><entry><title type="html">Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</title><link href="/blogs/ovac-hubtel-payment" rel="alternate" type="text/html" title="Introducing OVAC Hubtel Payment. The most comphrensive PHP client." /><published>2017-05-11T10:18:00+00:00</published><updated>2017-05-11T10:18:00+00:00</updated><id>/blogs/ovac-hubtel-payment</id><content type="html" xml:base="/blogs/ovac-hubtel-payment">&lt;p align=&quot;center&quot; style=&quot;border: 5px solid #000000&quot;&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506824544/4a_Uw7r_ljybq3.jpg&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_120/v1506828786/logo-composer-transparent_zjgal0.png&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506828063/brand_pbmsjk.gif&quot; /&gt;&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://www.ovac4u.com/hubtel-payment&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/v1506828380/logo_size_invert_jelh74.jpg&quot; /&gt;&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;ovac-hubtel-payment&quot;&gt;OVAC Hubtel Payment&lt;/h1&gt;
+&lt;p&gt;The best and most comphrensive PHP Client for consuming the Hubtel Payment API and for sending and receiving Mobile Money Payment from a php application with an elegant &lt;strong&gt;Write as it sounds&lt;/strong&gt; syntax.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-it&quot;&gt;What is it?&lt;/h2&gt;
+
+&lt;p&gt;OVAC/Hubtel-Payment is a comphrensive PHP client for consuming the Hubtel Mobile Money Payment server API. It’s a full-on PHP toolbet sugar-coated by an elegant syntax directly inspired by the &lt;a href=&quot;http://www.laravel.com&quot;&gt;Laravel framework&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It features a good set of methods and tests for accessing the Hubtel Mobile Money Payment with a &lt;strong&gt;Write as it sounds&lt;/strong&gt; syntax. Oh also it is growing all the time.&lt;/p&gt;
+
+&lt;p&gt;What’s the cherry on top? It wraps nicely around native Guzzlehttp client and uses most of PHP best practices in relation to usability and security. What does this mean? This means that &lt;code class=&quot;highlighter-rouge&quot;&gt;Pay::receiveMoney()-&amp;gt;from(0553577261)-&amp;gt;run();&lt;/code&gt; actually places a dynamic call behind the scene in a very secure manner using the phone number as the Customer’s idn as required by the Hubtel’s Mobile Money Receive Money api and prompts the owner of the phone number as an agent.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-ovachubtel-payment&quot;&gt;Install OVAC\Hubtel-Payment&lt;/h2&gt;
+
+&lt;p&gt;To install OVAC\HubtelPayment library, simply run&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer require ovac/hubtel-payment
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ovachubtel-payment-basic-usage&quot;&gt;OVAC\Hubtel-Payment Basic Usage&lt;/h2&gt;
+
+&lt;p&gt;First Obtain a Hubtel Developer Account Number, ClientID and ClientSecret from https://unity.hubtel.com/account/api-accounts-add&lt;/p&gt;
+
+&lt;h4 id=&quot;the-receivemoney-class-may-be-used-to-send-a-prompt-to-the-customers-phone-to-receive-money-like-a-mobile-money-agent-as-follows&quot;&gt;The ReceiveMoney class may be used to send a prompt to the customer’s phone to receive money like a mobile-money agent as follows:&lt;/h4&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;require_once&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/vendor/autoload.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Api\Transaction\ReceiveMoney&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// First Create configuration with your Hubtel Developer Credentials
+// The Account Number, ClientID and ClientSecret accordingly.
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Account_Nnumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientSecret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$payment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;nx&quot;&gt;ReceiveMoney&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'0553577261'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;//- The phone number to send the prompt to.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;//- The exact amount value of the transaction
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Online Purchase'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//- Description of the transaction.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;customerName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Ariama Victor'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;//- Name of the person making the payment.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://ovac4u.com/pay'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//- The URL to send callback after payment.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mtn-gh'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;//- The mobile network Channel.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;injectConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;//- Inject the configuration
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;                            &lt;span class=&quot;c1&quot;&gt;//- Run the transaction after required data.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;the-sendmoney-class-may-also-be-used-to-send-money-to-any-mobile-money-customer-as-follows&quot;&gt;The SendMoney class may also be used to send money to any mobile money customer as follows:&lt;/h4&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;require_once&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/vendor/autoload.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Api\Transaction\SendMoney&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// First Create configuration with your Hubtel Developer Credentials
+// The Account Number, ClientID and ClientSecret accordingly.
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Account_Nnumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientSecret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$payment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SendMoney&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'0553577261'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//- The phone number to send the prompt to.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;//- The exact amount value of the transaction
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Online Purchase'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//- Description of the transaction.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;customerEmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'admin@ovac4u.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//- Name of the person making the payment.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://ovac4u.com/pay'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//- The URL to send callback after payment.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mtn-gh'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;//- The mobile network Channel.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;injectConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;//- Inject the configuration
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;                            &lt;span class=&quot;c1&quot;&gt;//- Run the transaction after required data.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;the-refund-class-may-also-refund-money-a-customer-paid-in-a-previous-transaction&quot;&gt;The Refund class may also refund money a customer paid in a previous transaction:&lt;/h4&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;require_once&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/vendor/autoload.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\HubtelPayment\Api\Transaction\Refund&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// First Create configuration with your Hubtel Developer Credentials
+// The Account Number, ClientID and ClientSecret accordingly.
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Account_Nnumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ClientSecret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$payment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Refund&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;transactionId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;//- The ID of the transaction to refund.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;//- The exact amount value of the transaction
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clientReference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#11212'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//- A refeerence on your end.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Useless Purchase'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//- Description of the transaction.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reason&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'No longer needs a pen'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//- Name of the person making the payment.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;                            &lt;span class=&quot;c1&quot;&gt;//- Full or partial refund.
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;injectConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;//- Inject the configuration
+&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;                            &lt;span class=&quot;c1&quot;&gt;//- Run the transaction after required data.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;documentation&quot;&gt;Documentation&lt;/h1&gt;
+
+&lt;p&gt;You can find a detailed summary of all classes and methods on the &lt;a href=&quot;https://www.ovac4u.com/hubtel-payment&quot;&gt;official page&lt;/a&gt;. The changelog is available in the CHANGELOG file.&lt;/p&gt;
+
+&lt;p&gt;You can find a detailed summary of all classes and methods in the repo’s wiki or the official page. The changelog is available in the CHANGELOG file.&lt;/p&gt;
+
+&lt;h2 id=&quot;tests&quot;&gt;Tests&lt;/h2&gt;
+
+&lt;p&gt;if you have phpunit installed globally&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vendor/bin/phpunit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;or use the composer script&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer phpunit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;code-analysis-tools&quot;&gt;Code analysis tools&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;lint/checkstyle&lt;/em&gt;&lt;/strong&gt; with phpcs:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer phpcs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;mess detector&lt;/em&gt;&lt;/strong&gt; with phpmd:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer phpmd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;copy &amp;amp; paste detector&lt;/em&gt;&lt;/strong&gt; with phpcpd:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer phpcpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;phpunit, lint, mess detector&lt;/em&gt;&lt;/strong&gt; in one command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ composer test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ci&quot;&gt;CI&lt;/h2&gt;
+
+&lt;p&gt;A simple ci bash script exists under bin folder&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bin/ci.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;contributing&quot;&gt;Contributing&lt;/h2&gt;
+
+&lt;p&gt;Thank you for considering contributing to Laravel Hackathon Starter. The contribution guide can be found in the &lt;a href=&quot;https://github.com/ovac/hubtel-payment/blob/master/CONTRIBUTING.md&quot;&gt;Contribution File&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;security&quot;&gt;Security&lt;/h2&gt;
+
+&lt;p&gt;If you discover any security related issues, please email
+instead of using the issue tracker.&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ovac/hubtel-payment/graphs/contributors&quot;&gt;All contributors&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;licence&quot;&gt;Licence&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ovac/hubtel-payment/licence&quot;&gt;Licence: MIT&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ovac4u.com/hubtel-payment&quot;&gt;Official Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.github.com/ovac/hubtel-payment&quot;&gt;Official Repo: Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot;&gt;Hubtel Merchant Payment Reference&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://laravel.com&quot;&gt;Laravel framework&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ovac/hubtel-payment/blob/licence&quot;&gt;LICENCE: MIT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ovac/hubtel-payment/blob/master/CHANGELOG.md&quot;&gt;CHANGELOG&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-can-i-thank-you&quot;&gt;How can I thank you?&lt;/h2&gt;
+
+&lt;p&gt;Why not star the github repo? I’d love the attention! Why not share the link for this repository on Twitter or HackerNews? Spread the word!&lt;/p&gt;
+
+&lt;p&gt;Don’t forget to follow me on &lt;a href=&quot;http://www.instagram.com/ovac4u&quot;&gt;instagram&lt;/a&gt; and &lt;a href=&quot;http://www.twitter.com/ovac4u&quot;&gt;twitter&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks!
+Ariama Victor (ovac4u).&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="Getting Started" /><category term="tech" /><summary type="html"></summary></entry><entry><title type="html">Different views from one Laravel controller method.</title><link href="/blogs/multiple-views-from-one-laravel-controller" rel="alternate" type="text/html" title="Different views from one Laravel controller method." /><published>2017-02-09T05:22:00+00:00</published><updated>2017-02-09T05:22:00+00:00</updated><id>/blogs/multiple-views-from-one-laravel-controller</id><content type="html" xml:base="/blogs/multiple-views-from-one-laravel-controller">&lt;!-- # Multiple views from one Laravel controller --&gt;
+
+&lt;p&gt;Interestingly, this is very simple, but it could keep you hitting your head for a few hours.&lt;/p&gt;
+
+&lt;p&gt;When faced with this challenge, the recommended option is to implement the methods required on a base controller, and then for each view that needs the data on the base controller, a new controller should be created. After the controllers are created, they should each extends from the base controller – but then, does it always have to be this complex?&lt;/p&gt;
+
+&lt;p&gt;Sometimes, the best solution is just to get things working. In my own opinion, If it’s testable, readable and maintainable, it’s worth it.&lt;/p&gt;
+
+&lt;p&gt;If you find yourself in such a position, this is a very simple solution.&lt;/p&gt;
+
+&lt;h1 id=&quot;return-a-preferred-view-using-one-controller-based-on-the-requesting-url&quot;&gt;Return a preferred view using one controller based on the requesting URL.&lt;/h1&gt;
+
+&lt;p&gt;In this example, we will be considering two views and two routes. The controller ‘HelloController’ will return the preferred view based on conditions and constraints.&lt;/p&gt;
+
+&lt;h3 id=&quot;views&quot;&gt;Views&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;view1.blade.php&lt;/li&gt;
+  &lt;li&gt;view2.blade.php&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;routes&quot;&gt;Routes&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;http://exampe.com/hello&lt;/li&gt;
+  &lt;li&gt;http://exampe.com&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The first view (view1.blade.php) should be returned if the route is ‘http://exampe.com/hello’, but if it is the root (e.g http://exampe.com), then it should return the second view (view2.blade.php).&lt;/p&gt;
+
+&lt;p&gt;First, in your route, be sure to point both urls to the same controller. The following is a simple method using the Laravel route optional parameters with regex constraints.&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;Route&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'{path?}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'HelloController'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then in your the controller, you may return the view based on the requesting route.
+    &lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App\Http\Controllers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Illuminate\Http\Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Controller&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// data retrieval could be done here
+&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'view1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'view2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As you see, it’s a lot easier than one may perceive. It is also easily noticeable that the controller is testable, easily readable and therefore maintainable since the implementation has been done with less code and fewer files.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You may also suggest other cases and solutions. I give full credits! Did you find any typo or do want to make corrections or add your contributions? if so, please send me a pull request on github as &lt;a href=&quot;https://github.com/ovac/blogs/blob/master/_posts/2018-02-09-multiple-views-from-one-laravel-controller.md&quot;&gt;this blog post is hosted on github using markdown&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Victor Ariama</name></author><category term="laravel" /><category term="tech" /><summary type="html"></summary></entry><entry><title type="html">Welcome to my first blog post.</title><link href="/blogs/my-first-blog-post" rel="alternate" type="text/html" title="Welcome to my first blog post." /><published>2017-01-21T10:18:00+00:00</published><updated>2017-01-21T10:18:00+00:00</updated><id>/blogs/my-first-blog-post</id><content type="html" xml:base="/blogs/my-first-blog-post">&lt;h3 id=&quot;hi-im-victor-ariama-aka-ovac4u-welcome-to-my-first-blog-post&quot;&gt;Hi, I’m Victor Ariama (A.K.A. OVAC4U)! Welcome to my first blog post.&lt;/h3&gt;
+
+&lt;p&gt;As a lover and contributor to open source and seeing the increased number of visitors on my simple about-me website, I decided it will be fun to have a blog where I could share and sneak peeks, behind the scene pictures, and also to share some technical information, news and probably joke around from time to time.&lt;/p&gt;
+
+&lt;h3 id=&quot;first-let-me-tell-you-a-little-about-myself&quot;&gt;First, let me tell you a little about myself.&lt;/h3&gt;
+
+&lt;p&gt;My name is Ariama Victor and I am one of those africans who finds himself wanting to jump at every new web technology I can lay my hands on. I am 23 years &lt;del&gt;old&lt;/del&gt; young I’m a final year undergraduate student chasing my bachelor’s in business management and computer studies from an elite university in Ghana (Wisconsin International University Colledge).&lt;/p&gt;
+
+&lt;p&gt;I was born into a family of 7 (3 kid sisters, one lovely brother and of course my beautiful mother and an elegant father) in Lagos Nigeria. I moved to Ghana in December 2012 and have been based here ever since (It is a beautiful and peaceful country). I do not have much as a hubby because in my spare time, I write codes and every other time, I read, study, and write more codes.&lt;/p&gt;
+
+&lt;p&gt;I hope to use this share views on my porpular phrase dubbed &lt;code class=&quot;highlighter-rouge&quot;&gt;life of programmer&lt;/code&gt; which is based on my experience and challenges from day to day as an african developer.&lt;/p&gt;
+
+&lt;p&gt;Please do come around from time to time so that I there’ll be someone reading my posts, and I promise to keep the content of this blog rich and interesting.&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="Getting Started" /><summary type="html">Hi, I’m Victor Ariama (A.K.A. OVAC4U)! Welcome to my first blog post.</summary></entry></feed>

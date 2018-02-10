@@ -1,9 +1,3 @@
----
-layout: error
-current: error
-title: "404 - Page Not Found"
-permalink: 404.html
----
 <!--
 This error template is used for all 404 errors, which might occur on your site.
 It's a good idea to keep this template as minimal as possible in terms of both file size and complexity.
@@ -14,25 +8,82 @@ It's a good idea to keep this template as minimal as possible in terms of both f
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ page.title }}</title>
+    <title>404 - Page Not Found</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/screen.css" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/blogs/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/blogs/assets/built/screen.edited.css" />
     <!-- This tag outputs SEO meta+structured data and other important settings -->
-    {% include head.html %}
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="/blogs/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="/blogs/404.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="ovac4u" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="404 - Page Not Found" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="/blogs/404.html" />
+    <meta property="og:image" content="/blogs/https://res.cloudinary.com/ovac/image/upload/h_600/v1504965794/aboust_ey5v1v.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/ovac4u" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="404 - Page Not Found" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:url" content="/blogs/" />
+    <meta name="twitter:image" content="/blogs/https://res.cloudinary.com/ovac/image/upload/h_600/v1504965794/aboust_ey5v1v.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="ovac4u" />
+    <meta name="twitter:site" content="@ovac4u" />
+    <meta name="twitter:creator" content="@ovac4u" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ovac4u",
+        "logo": "/blogs/https://res.cloudinary.com/ovac/image/upload/v1517845930/238919685_7d0db432-084d-4185-8716-2c29eca1e626_x6cmp2.png"
+    },
+    "url": "/blogs/404.html",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/blogs/https://res.cloudinary.com/ovac/image/upload/h_600/v1504965794/aboust_ey5v1v.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/blogs/404.html"
+    },
+    "description": ""
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="404 - Page Not Found" href="/blogs/feed.xml" />
+
 </head>
 <body class="error-template">
     <div class="site-wrapper">
 
-        <header class="site-header outer {% if page.cover %}" style="background-image: url({% unless page.cover contains "https://" %}{{ site.baseurl }}{% endunless %}{{ page.cover }}){% else %}no-cover{% endif %}">
+        <header class="site-header outer no-cover">
             <div class="inner">
                 <nav class="site-nav-center">
-                    {% if site.logo %}
-                        <a class="site-nav-logo" href="/"><img src="{% unless site.logo contains "https://" %}{{ site.baseurl }}{% endunless %}{{ site.logo }}" alt="{{ site.title }}" /></a>
-                    {% else %}
-                        <a class="site-nav-logo" href="/">{{ site.title }}</a>
-                    {% endif %}
+                    
+                        <a class="site-nav-logo" href="/"><img src="https://res.cloudinary.com/ovac/image/upload/v1517845930/238919685_7d0db432-084d-4185-8716-2c29eca1e626_x6cmp2.png" alt="ovac4u" /></a>
+                    
                 </nav>
             </div>
         </header>
@@ -53,7 +104,140 @@ It's a good idea to keep this template as minimal as possible in terms of both f
             <div class="inner">
                 <div class="post-feed">
                     <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
-                    {%  include post-card-error.html %}
+                    
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/blogs/ovac-hubtel-payment">
+                    <div class="post-card-image" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/25795646893195.58698bb596a1c.jpg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/blogs/ovac-hubtel-payment">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                   <span class="post-card-tags">Getting started</span>
+                                
+                            
+                                
+                                    <span class="post-card-tags">Tech</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        <p>OVAC Hubtel Payment The best and most comphrensive PHP Client for consuming the Hubtel Payment API and for sending and receiving Mobile Money Payment from a php application with an elegant Write as</p>
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="https://res.cloudinary.com/ovac/image/upload/h_300/v1504965794/aboust_ey5v1v.jpg" alt="Victor Ariama" />
+                            
+                            <span class="post-card-author">
+                                <a href="/blogs/author/ovac4u/">Victor Ariama</a>
+                            </span>
+                        
+                    
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/blogs/multiple-views-from-one-laravel-controller">
+                    <div class="post-card-image" style="background-image: url(https://cdnp-2f3a.kxcdn.com/blog/wp-content/uploads/2016/04/Why-Laravel.jpg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/blogs/multiple-views-from-one-laravel-controller">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                   <span class="post-card-tags">Laravel</span>
+                                
+                            
+                                
+                                    <span class="post-card-tags">Tech</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">Different views from one Laravel controller method.</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        <p>Interestingly, this is very simple, but it could keep you hitting your head for a few hours. When faced with this challenge, the recommended option is to implement the methods required on a</p>
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="https://res.cloudinary.com/ovac/image/upload/h_300/v1504965794/aboust_ey5v1v.jpg" alt="Victor Ariama" />
+                            
+                            <span class="post-card-author">
+                                <a href="/blogs/author/ovac4u/">Victor Ariama</a>
+                            </span>
+                        
+                    
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/blogs/my-first-blog-post">
+                    <div class="post-card-image" style="background-image: url(https://doingitmayerstyle.files.wordpress.com/2014/04/welcome-to-my-blog-now-what.jpg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/blogs/my-first-blog-post">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                    <span class="post-card-tags">Getting started</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">Welcome to my first blog post.</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        <p>Hi, I’m Victor Ariama (A.K.A. OVAC4U)! Welcome to my first blog post. As a lover and contributor to open source and seeing the increased number of visitors on my simple about-me website, I</p>
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="https://res.cloudinary.com/ovac/image/upload/h_300/v1504965794/aboust_ey5v1v.jpg" alt="Victor Ariama" />
+                            
+                            <span class="post-card-author">
+                                <a href="/blogs/author/ovac4u/">Victor Ariama</a>
+                            </span>
+                        
+                    
+                </footer>
+            </div>
+        </article>
+    
+
+
                 </div>
             </div>
         </aside>
@@ -62,3 +246,4 @@ It's a good idea to keep this template as minimal as possible in terms of both f
     </div>
 </body>
 </html>
+

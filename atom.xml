@@ -1,28 +1,60 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.name | xml_escape }} - Articles</title>
-    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
+    <title> - Articles</title>
+    <description></description>
     <link>
-    {{ site.url }}</link>
-    {% for post in site.posts %}
-      {% unless post.link %}
+    </link>
+    
+      
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        {% if post.excerpt %}
-          <description>{{ post.excerpt | xml_escape }}</description>
-        {% else %}
-          <description>{{ post.content | xml_escape }}</description>
-        {% endif %}
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+        <title>Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</title>
+        
+          <description>&lt;p align=&quot;center&quot; style=&quot;border: 5px solid #000000&quot;&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506824544/4a_Uw7r_ljybq3.jpg&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_120/v1506828786/logo-composer-transparent_zjgal0.png&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506828063/brand_pbmsjk.gif&quot; /&gt;&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://www.ovac4u.com/hubtel-payment&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/v1506828380/logo_size_invert_jelh74.jpg&quot; /&gt;&lt;/a&gt;
+&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 11 May 2017 10:18:00 +0000</pubDate>
         <link>
-        {{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        /ovac-hubtel-payment</link>
+        <guid isPermaLink="true">/ovac-hubtel-payment</guid>
       </item>
-      {% endunless %}
-    {% endfor %}
+      
+    
+      
+      <item>
+        <title>Different views from one Laravel controller method.</title>
+        
+          <description>&lt;!-- # Multiple views from one Laravel controller --&gt;
+
+</description>
+        
+        <pubDate>Thu, 09 Feb 2017 05:22:00 +0000</pubDate>
+        <link>
+        /multiple-views-from-one-laravel-controller</link>
+        <guid isPermaLink="true">/multiple-views-from-one-laravel-controller</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to my first blog post.</title>
+        
+          <description>&lt;h3 id=&quot;hi-im-victor-ariama-aka-ovac4u-welcome-to-my-first-blog-post&quot;&gt;Hi, I’m Victor Ariama (A.K.A. OVAC4U)! Welcome to my first blog post.&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Sat, 21 Jan 2017 10:18:00 +0000</pubDate>
+        <link>
+        /my-first-blog-post</link>
+        <guid isPermaLink="true">/my-first-blog-post</guid>
+      </item>
+      
+    
   </channel>
 </rss>
