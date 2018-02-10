@@ -11,7 +11,7 @@ subclass: 'tags-tech, tags-laravel'
 author: ovac4u
 ---
 
-<!-- # Multiple views from one Laravel controller -->
+<!-- # Different views from one Laravel controller method -->
 
 Interestingly, this is very simple, but it could keep you hitting your head for a few hours.
 
