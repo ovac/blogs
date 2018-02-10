@@ -33,6 +33,8 @@ In this example, we will be considering two views and two routes. The controller
   1. http://exampe.com/hello
   2. http://exampe.com
 
+<br>
+
 The first view (view1.blade.php) should be returned if the route is 'http://exampe.com/hello', but if it is the root (e.g http://exampe.com), then it should return the second view (view2.blade.php).
 
 First, in your route, be sure to point both urls to the same controller. The following is a simple method using the Laravel route optional parameters with regex constraints.
