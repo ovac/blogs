@@ -19,7 +19,7 @@ When faced with this challenge, the recommended option is to implement the metho
 
 Sometimes, the best solution is just to get things working. In my own opinion, If it's testable, readable and maintainable, it's worth it.
 
-If you find yourself in such a position, here's are some simple ways to get it fixed and working.
+If you find yourself in such a position, this is a very simple solution.
 
 # Return a preferred view using one controller based on the requesting URL.
 
