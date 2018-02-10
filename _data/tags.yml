@@ -13,6 +13,10 @@ fables:
 tech:
   name: tech
   description: Most of my rantings about tech
+  cover: Falsejpg
+goofy:
+  name: goofy
+  description: Just me goofing around
   cover: False
 laravel:
   name: laravel
