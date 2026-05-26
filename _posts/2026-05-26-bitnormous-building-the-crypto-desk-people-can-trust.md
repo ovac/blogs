@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: https://opengraph.githubassets.com/ovac-bitnormous-20260526/ovac/blogs
+cover: https://bitnormous.com/hand-phone.png
 navigation: True
 title: "Bitnormous: building the crypto desk people can trust"
 date: 2026-05-26 03:40:00
@@ -40,6 +40,8 @@ That is why I think of Bitnormous less as a "crypto website" and more as a digit
 ## The buy and sell flows are the heart
 
 Bitnormous is intentionally direct about its core workflows.
+
+![Bitnormous buy and sell transaction interface](https://bitnormous.com/buy-sell-ui.svg)
 
 For buying, the public buy page focuses on quick registration, flexible payment options, real-time rates, and full transparency. The flow is straightforward: create an account, load the wallet, place the order, and receive the digital currency.
 
