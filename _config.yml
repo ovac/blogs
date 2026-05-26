@@ -29,6 +29,12 @@ facebook: ovac4u # replace by your username
 disqus: True
 disqus_shortname: ovac4u # replace with your disqus username
 
+# Product Hunt — used by _includes/ph-badge.html
+producthunt:
+  post_id: 1156716
+  slug: gidipex
+  tagline: The trading arcade -- futures, contests, hall of fame
+
 # Google Analytics
 google_analytics: UA-104991685-1 # replace with your GA tracking identifier
 
