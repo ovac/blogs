@@ -1,0 +1,36 @@
+{%- comment -%}
+Product Hunt "Featured" badge for the gidipex listing.
+
+Single source of truth for post_id / slug / tagline is `site.producthunt`
+in _config.yml -- update there, not here.
+
+Parameters:
+  theme   = "light" | "neutral" | "dark"   (default: auto via <picture>)
+  source  = utm_source segment             (default: "badge-featured")
+
+Usage:
+  {% include ph-badge.html %}
+  {% include ph-badge.html theme="dark" %}
+  {% include ph-badge.html source="blog-footer" %}
+{%- endcomment -%}
+{%- assign ph        = site.producthunt -%}
+{%- assign theme     = include.theme  | default: nil -%}
+{%- assign source    = include.source | default: "badge-featured" -%}
+{%- assign alt_text  = "Gidipex - " | append: ph.tagline | append: " | Product Hunt" -%}
+{%- capture link_href -%}
+https://www.producthunt.com/products/{{ ph.slug }}?embed=true&utm_source={{ source }}&utm_medium=badge&utm_campaign=badge-{{ ph.slug }}
+{%- endcapture -%}
+{%- capture badge_base -%}
+https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id={{ ph.post_id }}
+{%- endcapture -%}
+<a href="{{ link_href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ alt_text }}">
+  {%- if theme -%}
+    <img alt="{{ alt_text }}" width="250" height="54" loading="lazy" src="{{ badge_base }}&theme={{ theme }}">
+  {%- else -%}
+    <picture>
+      <source media="(prefers-color-scheme: dark)"  srcset="{{ badge_base }}&theme=dark">
+      <source media="(prefers-color-scheme: light)" srcset="{{ badge_base }}&theme=light">
+      <img alt="{{ alt_text }}" width="250" height="54" loading="lazy" src="{{ badge_base }}&theme=neutral">
+    </picture>
+  {%- endif -%}
+</a>
