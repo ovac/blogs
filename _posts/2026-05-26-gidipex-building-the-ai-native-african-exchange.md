@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: https://opengraph.githubassets.com/ovac-gidipex-20260526/ovac/blogs
+cover: https://gidipex.com/og-image.png
 navigation: True
 title: "Gidipex: building the AI-native African exchange"
 date: 2026-05-26 03:50:00
@@ -43,6 +43,8 @@ That matters because fragmented trading is expensive. If one app gives you rates
 
 Gidipex uses the phrase "Vibe Trading" publicly because the product is trying to close the gap between market information and action.
 
+![Gidipex Android app command center](https://play-lh.googleusercontent.com/pNAJc8tLWgCcL-iOU9ynIjZX91fEsKdxpVVMxKCQVCSPurLKb5m-UsCrSemSKqOwvlp5zTbiy6wsOz-2HIdYAB8=w1052-h592)
+
 But AI is not magic dust.
 
 AI is useful only when it is attached to real execution surfaces, real account state, real market data, and real risk boundaries. Otherwise it becomes commentary.
@@ -54,6 +56,8 @@ This is especially important in African markets.
 Many users live in messaging apps. They already negotiate, pay, support customers, send receipts, and manage business relationships there. A trading platform that ignores that behavior is forcing users into a colder workflow than necessary.
 
 The AI layer should not replace the exchange. It should make the exchange easier to command.
+
+![Gidipex Android AI assistant](https://play-lh.googleusercontent.com/ZPAn5Z4Fubw6J-KW6Q9fwIwr4UhqN-hC65qGf26b7FR53PkLnih1ZBTz2uuIWuSPO1lLutcCTDaYLSVASrVmcw=w1052-h592)
 
 ## Africa needs regional rails, not generic checkout buttons
 

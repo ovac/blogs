@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: https://opengraph.githubassets.com/ovac-idoc-20260526/ovac/idoc
+cover: https://res.cloudinary.com/ovac/image/upload/v1556662864/shadow_image_103039_ssqirj.png
 navigation: True
 title: "iDoc: API documentation that stays close to the code"
 date: 2026-05-26 03:00:00
