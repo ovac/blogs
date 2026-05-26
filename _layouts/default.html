@@ -65,6 +65,9 @@
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/myJekyll/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                {% if site.producthunt %}
+                <section class="featured-on">{% include ph-badge.html source="blog-footer" %}</section>
+                {% endif %}
                 <nav class="site-footer-nav">
                     <a href="{{ site.baseurl }}">Latest Posts</a>
                     {% if site.facebook %}<a href="https://facebook.com/{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif %}
