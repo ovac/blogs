@@ -38,9 +38,9 @@
     
       
       <item>
-        <title>Guardrails: a human approval layer for dangerous Laravel changes</title>
+        <title>Guardrails: an asynchronous human-in-the-middle layer for Laravel</title>
         
-          <description>&lt;p&gt;Some application actions are too important to be treated like ordinary writes.&lt;/p&gt;
+          <description>&lt;p&gt;Some application actions are too important to be applied the moment they are requested.&lt;/p&gt;
 
 </description>
         
