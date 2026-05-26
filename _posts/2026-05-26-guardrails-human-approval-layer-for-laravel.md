@@ -4,7 +4,7 @@ current: post
 cover: https://opengraph.githubassets.com/ovac-guardrails-20260526/ovac/guardrails
 navigation: True
 title: "Guardrails: a human approval layer for dangerous Laravel changes"
-date: 2026-05-26 09:30:00
+date: 2026-05-26 03:10:00
 tags: [tech, laravel]
 class: post-template
 subclass: 'post tag-tech tag-laravel'
