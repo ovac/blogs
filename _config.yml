@@ -29,8 +29,10 @@ facebook: ovac4u # replace by your username
 disqus: True
 disqus_shortname: ovac4u # replace with your disqus username
 
-# Google Analytics
-google_analytics: UA-104991685-1 # replace with your GA tracking identifier
+# Analytics are dispatched through Google Tag Manager (GTM-TWFSSDL),
+# wired in _layouts/default.html. To add GA4, PostHog, Hotjar, etc,
+# do it inside the GTM workspace -- no Jekyll changes needed.
+# The dead UA property (UA-104991685-1) was removed on 2026-05-26.
 
 # Permalinks
 permalink: /:title
