@@ -4,7 +4,7 @@ current: post
 cover: https://opengraph.githubassets.com/ovac-idoc-20260526/ovac/idoc
 navigation: True
 title: "iDoc: API documentation that stays close to the code"
-date: 2026-05-26 09:00:00
+date: 2026-05-26 03:00:00
 tags: [tech, laravel]
 class: post-template
 subclass: 'post tag-tech tag-laravel'
