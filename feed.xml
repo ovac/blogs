@@ -1,4 +1,309 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/blogs/feed.xml" rel="self" type="application/atom+xml" /><link href="/blogs/" rel="alternate" type="text/html" /><updated>2026-05-26T04:04:09+00:00</updated><id>/blogs/</id><title type="html">ovac4u</title><entry><title type="html">Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</title><link href="/blogs/ovac-hubtel-payment" rel="alternate" type="text/html" title="Introducing OVAC Hubtel Payment. The most comphrensive PHP client." /><published>2017-05-11T10:18:00+00:00</published><updated>2017-05-11T10:18:00+00:00</updated><id>/blogs/ovac-hubtel-payment</id><content type="html" xml:base="/blogs/ovac-hubtel-payment">&lt;p align=&quot;center&quot; style=&quot;border: 5px solid #000000&quot;&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506824544/4a_Uw7r_ljybq3.jpg&quot; /&gt;&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/blogs/feed.xml" rel="self" type="application/atom+xml" /><link href="/blogs/" rel="alternate" type="text/html" /><updated>2026-05-26T04:08:46+00:00</updated><id>/blogs/</id><title type="html">ovac4u</title><entry><title type="html">Guardrails: a human approval layer for dangerous Laravel changes</title><link href="/blogs/guardrails-human-approval-layer-for-laravel" rel="alternate" type="text/html" title="Guardrails: a human approval layer for dangerous Laravel changes" /><published>2026-05-26T03:10:00+00:00</published><updated>2026-05-26T03:10:00+00:00</updated><id>/blogs/guardrails-human-approval-layer-for-laravel</id><content type="html" xml:base="/blogs/guardrails-human-approval-layer-for-laravel">&lt;p&gt;Some application actions are too important to be treated like ordinary writes.&lt;/p&gt;
+
+&lt;p&gt;Publishing a post is not the same as saving a draft. Changing a payout account is not the same as updating a display name. Raising a withdrawal limit is not the same as editing a preference. Disabling a user, changing a feature flag, approving a refund, modifying a local exchange rate, moving money, changing policy text - these are not just CRUD operations.&lt;/p&gt;
+
+&lt;p&gt;They are operational decisions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ovac/guardrails&quot;&gt;Guardrails&lt;/a&gt; is a Laravel package for those decisions. It is an approvals engine that captures high-risk changes, routes them through the right reviewers, records signatures, and applies the update only after the required approval flow is satisfied.&lt;/p&gt;
+
+&lt;p&gt;The package exists because “only admins can do it” is not enough.&lt;/p&gt;
+
+&lt;p&gt;Admins make mistakes. Operators work under pressure. A tired engineer can change the wrong flag. A support lead can approve the wrong refund. A founder can move too quickly. The goal is not to remove trust from the system. The goal is to turn trust into a workflow that leaves evidence.&lt;/p&gt;
+
+&lt;h2 id=&quot;approval-is-business-logic&quot;&gt;Approval is business logic&lt;/h2&gt;
+
+&lt;p&gt;Many applications hide approvals in places where they become hard to reason about.&lt;/p&gt;
+
+&lt;p&gt;Sometimes approvals live in a Slack thread. Sometimes they live in a spreadsheet. Sometimes they are buried in a controller method:&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isAdmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$order&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'refunded'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$order&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That code answers one question: can this user perform the action?&lt;/p&gt;
+
+&lt;p&gt;It does not answer the better questions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Should this action pause for review?&lt;/li&gt;
+  &lt;li&gt;Who should review it?&lt;/li&gt;
+  &lt;li&gt;Does the initiator count as one signer?&lt;/li&gt;
+  &lt;li&gt;Is one approval enough, or do we need two?&lt;/li&gt;
+  &lt;li&gt;Should Finance approve before Security?&lt;/li&gt;
+  &lt;li&gt;What original value did we replace?&lt;/li&gt;
+  &lt;li&gt;Who signed, when, and why?&lt;/li&gt;
+  &lt;li&gt;What event should notify the rest of the system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Those questions are business logic. They deserve first-class code.&lt;/p&gt;
+
+&lt;p&gt;Guardrails makes that approval logic explicit.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-core-model-capture-sign-apply&quot;&gt;The core model: capture, sign, apply&lt;/h2&gt;
+
+&lt;p&gt;The package follows a simple lifecycle.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A guarded change is attempted.&lt;/li&gt;
+  &lt;li&gt;Guardrails captures the proposed mutation and the original values.&lt;/li&gt;
+  &lt;li&gt;It creates an approval request with one or more approval steps.&lt;/li&gt;
+  &lt;li&gt;Eligible signers approve or reject each step.&lt;/li&gt;
+  &lt;li&gt;When the flow is satisfied, Guardrails applies the captured change.&lt;/li&gt;
+  &lt;li&gt;Events fire so the application can notify people, audit, or integrate elsewhere.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The public package ships with migrations for approval requests, approval steps, and approval signatures. That data model is important. It means the approval is not a side conversation. It is application state.&lt;/p&gt;
+
+&lt;p&gt;That state can be queried, displayed, audited, tested, and connected to the rest of the system.&lt;/p&gt;
+
+&lt;h2 id=&quot;use-it-on-models-or-at-the-controller-edge&quot;&gt;Use it on models or at the controller edge&lt;/h2&gt;
+
+&lt;p&gt;Guardrails supports two natural entry points.&lt;/p&gt;
+
+&lt;p&gt;The first is model-level guarding. Add the trait, declare the attributes that need review, and define the approval flow.&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\Guardrails\Concerns\Guardrail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OVAC\Guardrails\Services\Flow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Guardrail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;guardrailAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'published'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;guardrailApprovalDescription&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dirty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Publish flag changes require editorial approval.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;guardrailApprovalFlow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dirty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;Flow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyOfPermissions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'content.publish'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;includeInitiator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Editorial Review'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That is a two-man rule for publishing: the author can count as one approval, but another eligible editor must sign before the change lands.&lt;/p&gt;
+
+&lt;p&gt;The second entry point is controller interception. That is useful when a risky action comes from an HTTP workflow, an admin tool, or an external system and you do not want to put all of the approval logic inside the model.&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;guardrailIntercept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'published'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'description'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Editorial approval required before publishing.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'only'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'published'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'extender'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Flow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyOfRoles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'editor'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'managing_editor'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Editorial Approval'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Both approaches matter. Some rules belong close to the domain model. Some rules belong at the edge of the request. A good approvals system should support both.&lt;/p&gt;
+
+&lt;h2 id=&quot;flows-should-read-like-policy&quot;&gt;Flows should read like policy&lt;/h2&gt;
+
+&lt;p&gt;The best part of Guardrails is the flow builder.&lt;/p&gt;
+
+&lt;p&gt;Approval code should be readable by the people who own the policy. If a product manager, operations lead, or security reviewer cannot understand the shape of the flow, the code is too clever.&lt;/p&gt;
+
+&lt;p&gt;Guardrails flows are intentionally plain:&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Flow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyOfPermissions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ops.change'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;includeInitiator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Ops Review'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyOfRoles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'cto'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cfo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Executive Sign-off'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That says what it means:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ops starts the review.&lt;/li&gt;
+  &lt;li&gt;The initiator can be counted.&lt;/li&gt;
+  &lt;li&gt;Two ops-level signatures are required.&lt;/li&gt;
+  &lt;li&gt;Then one executive signature is required.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The package also supports role-based and permission-based signers, any-of or all-of matching, initiator rules, same-permission or same-role constraints, rejection thresholds, configurable controller flows, and multi-step escalation.&lt;/p&gt;
+
+&lt;p&gt;That gives you enough vocabulary to model real company rules without turning approval logic into a separate workflow platform.&lt;/p&gt;
+
+&lt;h2 id=&quot;real-use-cases&quot;&gt;Real use cases&lt;/h2&gt;
+
+&lt;p&gt;Guardrails is not only for one kind of application.&lt;/p&gt;
+
+&lt;p&gt;In a content system, it can require author plus editor approval before a post goes live.&lt;/p&gt;
+
+&lt;p&gt;In a sales system, it can route discounts below 20 percent to a sales lead and discounts above that to a VP.&lt;/p&gt;
+
+&lt;p&gt;In finance, it can require two signatures before a payout is released.&lt;/p&gt;
+
+&lt;p&gt;In engineering, it can pause feature flag changes until operations and an engineering lead approve rollout.&lt;/p&gt;
+
+&lt;p&gt;In compliance, it can require legal or security sign-off before policy text changes.&lt;/p&gt;
+
+&lt;p&gt;In a crypto or fintech product, the same pattern applies to withdrawal limits, payment route configuration, settlement details, and anything else where “just save it” is too weak.&lt;/p&gt;
+
+&lt;p&gt;The package includes a reviewer UI, API endpoints, events, docs, a flow-builder playground, and tests. That matters because approval systems are operational software. They need to be visible, scriptable, and testable.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-this-belongs-in-laravel&quot;&gt;Why this belongs in Laravel&lt;/h2&gt;
+
+&lt;p&gt;Laravel teams already model business operations in Eloquent models, controllers, policies, events, queues, notifications, and tests.&lt;/p&gt;
+
+&lt;p&gt;Approvals should fit into that ecosystem.&lt;/p&gt;
+
+&lt;p&gt;Guardrails uses Laravel conventions instead of asking teams to adopt a separate workflow engine for a common class of problems. It works with the application auth layer, supports Spatie permissions or token abilities, publishes migrations and views, and lets the application keep ownership of the final policy.&lt;/p&gt;
+
+&lt;p&gt;That is the right tradeoff for many products. You get enough structure to prevent dangerous writes from happening silently, without moving your whole operational model outside the app.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-principle&quot;&gt;The principle&lt;/h2&gt;
+
+&lt;p&gt;Guardrails is built around one principle:&lt;/p&gt;
+
+&lt;p&gt;High-risk changes should be proposed before they are applied.&lt;/p&gt;
+
+&lt;p&gt;That one shift changes the posture of an application. It creates time to review. It creates a record. It gives events somewhere to attach. It lets teams encode their operational maturity in code instead of relying on memory.&lt;/p&gt;
+
+&lt;p&gt;The older an application gets, the more important this becomes. New systems can survive on trust and speed for a while. Serious systems need traceability. They need review paths. They need a way to say, “this change matters enough to slow down.”&lt;/p&gt;
+
+&lt;p&gt;That is what Guardrails gives Laravel teams.&lt;/p&gt;
+
+&lt;p&gt;Repository: &lt;a href=&quot;https://github.com/ovac/guardrails&quot;&gt;github.com/ovac/guardrails&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Docs: &lt;a href=&quot;https://ovac.github.io/guardrails/&quot;&gt;ovac.github.io/guardrails&lt;/a&gt;&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="tech" /><category term="laravel" /><summary type="html">Some application actions are too important to be treated like ordinary writes.</summary></entry><entry><title type="html">iDoc: API documentation that stays close to the code</title><link href="/blogs/idoc-api-documentation-that-stays-close-to-the-code" rel="alternate" type="text/html" title="iDoc: API documentation that stays close to the code" /><published>2026-05-26T03:00:00+00:00</published><updated>2026-05-26T03:00:00+00:00</updated><id>/blogs/idoc-api-documentation-that-stays-close-to-the-code</id><content type="html" xml:base="/blogs/idoc-api-documentation-that-stays-close-to-the-code">&lt;p&gt;Most teams do not set out to have bad API documentation.&lt;/p&gt;
+
+&lt;p&gt;It happens slowly.&lt;/p&gt;
+
+&lt;p&gt;A route changes. A request parameter is renamed. A JSON response gets one more nested field. The frontend team learns it from Slack. The mobile team learns it from a failed request. The external partner learns it from production. The documentation, if it exists, is now a memory of how the API used to work.&lt;/p&gt;
+
+&lt;p&gt;That is the problem I wanted &lt;code class=&quot;highlighter-rouge&quot;&gt;ovac/idoc&lt;/code&gt; to solve.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ovac/idoc&quot;&gt;iDoc&lt;/a&gt; is a Laravel package for generating interactive API documentation and an OpenAPI 3.0 spec from an existing Laravel application. The idea is simple: your application already knows a lot about your API. Your routes, controllers, PHPDoc, request metadata, and conventions should be enough to produce a useful API reference without asking a developer to maintain a second manual copy of the same truth.&lt;/p&gt;
+
+&lt;p&gt;The package started from a practical place. I wanted Laravel API docs that were not just technically generated, but actually comfortable to read and use. A generated Markdown page is useful. A generated OpenAPI file is useful. But developers live inside workflows. They need to read an endpoint, understand the payload, try a request, inspect the response, copy an example, and move on.&lt;/p&gt;
+
+&lt;p&gt;iDoc is my attempt to make that loop tight.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-documentation-is-a-product-surface&quot;&gt;The documentation is a product surface&lt;/h2&gt;
+
+&lt;p&gt;For a long time, I treated API documentation as a byproduct of engineering. Build the API first, then write something down at the end.&lt;/p&gt;
+
+&lt;p&gt;That is backwards for serious systems.&lt;/p&gt;
+
+&lt;p&gt;The docs are part of the product surface. They are where an integrator forms their first model of your system. They are where a frontend developer decides whether the backend is predictable. They are where a future version of you tries to remember why an endpoint behaves a certain way.&lt;/p&gt;
+
+&lt;p&gt;That is why iDoc does more than dump route names.&lt;/p&gt;
+
+&lt;p&gt;The current public version of iDoc generates an OpenAPI document and renders it with a hybrid interface:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ReDoc for fast, readable API reference navigation.&lt;/li&gt;
+  &lt;li&gt;Swagger UI in a side panel for “Try it” requests.&lt;/li&gt;
+  &lt;li&gt;A theme toggle that keeps the reader and tester in the same visual mode.&lt;/li&gt;
+  &lt;li&gt;Extra request headers for realistic authenticated testing.&lt;/li&gt;
+  &lt;li&gt;OpenAPI 3.0 output at a predictable public path.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That combination matters. Reading and testing should not be separate rituals. A good API reference should let you move from “what does this endpoint do?” to “what happens if I call it?” without leaving the page.&lt;/p&gt;
+
+&lt;h2 id=&quot;generated-but-not-careless&quot;&gt;Generated, but not careless&lt;/h2&gt;
+
+&lt;p&gt;iDoc is generated from a Laravel codebase, but it is not meant to encourage careless documentation.&lt;/p&gt;
+
+&lt;p&gt;Generation gives you the skeleton. You still need discipline in how you write controllers, comments, request validation, route groups, and examples. The package gives the application a way to publish the truth it already carries. It does not remove the need to make that truth clean.&lt;/p&gt;
+
+&lt;p&gt;The core command is deliberately boring:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;php artisan idoc:generate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Behind that command, iDoc inspects the routes selected by configuration, skips routes marked with &lt;code class=&quot;highlighter-rouge&quot;&gt;@hideFromAPIDocumentation&lt;/code&gt;, groups the parsed output, and writes an OpenAPI JSON file. That is the correct kind of boring. Documentation generation should feel like running tests or compiling assets. It should not feel like a special event.&lt;/p&gt;
+
+&lt;p&gt;The config also lets you decide where the docs live:&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s1&quot;&gt;'path'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'idoc'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;'output'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;'tryit'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'enabled'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'IDOC_TRYIT_ENABLED'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That means a team can start with &lt;code class=&quot;highlighter-rouge&quot;&gt;/idoc&lt;/code&gt;, publish &lt;code class=&quot;highlighter-rouge&quot;&gt;openapi.json&lt;/code&gt;, and decide how much interactivity belongs in each environment.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-ai-assistant-belongs-in-the-docs-not-beside-them&quot;&gt;The AI assistant belongs in the docs, not beside them&lt;/h2&gt;
+
+&lt;p&gt;One of the newer pieces I like in iDoc is the optional chat assistant.&lt;/p&gt;
+
+&lt;p&gt;The temptation with AI tools is to bolt them onto everything as decoration. That is not useful. In API documentation, though, an assistant has a real job: help a developer ask questions against the generated spec and the extra context the application owner chooses to provide.&lt;/p&gt;
+
+&lt;p&gt;iDoc’s chat feature is provider-agnostic. Public configuration supports providers like DeepSeek, OpenAI, Google Gemini, Groq, Hugging Face Inference API, Together AI, and OpenAI-compatible local servers. The important part is not the provider list. The important part is that the assistant is grounded in the API documentation surface.&lt;/p&gt;
+
+&lt;p&gt;It can sit beside the OpenAPI reference and help answer questions like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Which endpoint should I call for this workflow?&lt;/li&gt;
+  &lt;li&gt;What payload shape does this route expect?&lt;/li&gt;
+  &lt;li&gt;Can you show an example request body?&lt;/li&gt;
+  &lt;li&gt;Which authorization header should I use?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The chat panel also includes a request tester workflow. That makes the assistant less of a chatbot and more of a navigation layer over the API.&lt;/p&gt;
+
+&lt;p&gt;For me, that is the right direction. API documentation should become an operating console for integration work.&lt;/p&gt;
+
+&lt;h2 id=&quot;wide-compatibility-is-a-maintenance-promise&quot;&gt;Wide compatibility is a maintenance promise&lt;/h2&gt;
+
+&lt;p&gt;One detail I care about in iDoc is the compatibility range. The public Composer constraints support older Laravel 5.5-era applications and modern Laravel versions up through the current 13 series constraints in the repository.&lt;/p&gt;
+
+&lt;p&gt;That is not glamorous, but it matters.&lt;/p&gt;
+
+&lt;p&gt;Many useful Laravel applications are not rewritten every year. They are upgraded carefully, often under business pressure, while still serving real users. A documentation generator that only works for the newest stack leaves a lot of serious applications behind.&lt;/p&gt;
+
+&lt;p&gt;iDoc is designed for those real-world codebases:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;composer require ovac/idoc
+php artisan vendor:publish &lt;span class=&quot;nt&quot;&gt;--tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;idoc-config
+php artisan idoc:generate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For Lumen applications, it also exposes a service provider path so smaller API services can use the same documentation approach.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-i-learned-building-it&quot;&gt;What I learned building it&lt;/h2&gt;
+
+&lt;p&gt;The biggest lesson is that API docs fail when they become ceremonial.&lt;/p&gt;
+
+&lt;p&gt;If documentation requires a developer to stop normal work, open another tool, and manually rewrite what the code already knows, it will eventually drift. The better path is to make documentation part of the application lifecycle.&lt;/p&gt;
+
+&lt;p&gt;That means:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generate the spec from the app.&lt;/li&gt;
+  &lt;li&gt;Render it in a way humans actually want to read.&lt;/li&gt;
+  &lt;li&gt;Let developers try requests from the same surface.&lt;/li&gt;
+  &lt;li&gt;Keep configuration in Laravel where the team already works.&lt;/li&gt;
+  &lt;li&gt;Let teams customize prompts, routes, middleware, themes, and assets without forking the package.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That is the shape of iDoc.&lt;/p&gt;
+
+&lt;p&gt;It is not just “docs for Laravel APIs.” It is a small argument about how API teams should work: keep the documentation close to the code, keep the reference interactive, and make the integration path obvious.&lt;/p&gt;
+
+&lt;p&gt;If your API is important enough for another person to integrate with it, it is important enough to have documentation that behaves like part of the product.&lt;/p&gt;
+
+&lt;p&gt;Repository: &lt;a href=&quot;https://github.com/ovac/idoc&quot;&gt;github.com/ovac/idoc&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Docs: &lt;a href=&quot;https://www.ovac4u.com/idoc&quot;&gt;ovac4u.com/idoc&lt;/a&gt;&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="tech" /><category term="laravel" /><summary type="html">Most teams do not set out to have bad API documentation.</summary></entry><entry><title type="html">Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</title><link href="/blogs/ovac-hubtel-payment" rel="alternate" type="text/html" title="Introducing OVAC Hubtel Payment. The most comphrensive PHP client." /><published>2017-05-11T10:18:00+00:00</published><updated>2017-05-11T10:18:00+00:00</updated><id>/blogs/ovac-hubtel-payment</id><content type="html" xml:base="/blogs/ovac-hubtel-payment">&lt;p align=&quot;center&quot; style=&quot;border: 5px solid #000000&quot;&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506824544/4a_Uw7r_ljybq3.jpg&quot; /&gt;&lt;/a&gt;
 &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_120/v1506828786/logo-composer-transparent_zjgal0.png&quot; /&gt;&lt;/a&gt;
 &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506828063/brand_pbmsjk.gif&quot; /&gt;&lt;/a&gt;
 &lt;br /&gt;

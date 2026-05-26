@@ -8,6 +8,36 @@
     
       
       <item>
+        <title>Guardrails: a human approval layer for dangerous Laravel changes</title>
+        
+          <description>&lt;p&gt;Some application actions are too important to be treated like ordinary writes.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 26 May 2026 03:10:00 +0000</pubDate>
+        <link>
+        /guardrails-human-approval-layer-for-laravel</link>
+        <guid isPermaLink="true">/guardrails-human-approval-layer-for-laravel</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iDoc: API documentation that stays close to the code</title>
+        
+          <description>&lt;p&gt;Most teams do not set out to have bad API documentation.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 26 May 2026 03:00:00 +0000</pubDate>
+        <link>
+        /idoc-api-documentation-that-stays-close-to-the-code</link>
+        <guid isPermaLink="true">/idoc-api-documentation-that-stays-close-to-the-code</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Introducing OVAC Hubtel Payment. The most comphrensive PHP client.</title>
         
           <description>&lt;p align=&quot;center&quot; style=&quot;border: 5px solid #000000&quot;&gt;&lt;a href=&quot;https://developers.hubtel.com/documentations/merchant-account-api&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://res.cloudinary.com/ovac/image/upload/h_200/v1506824544/4a_Uw7r_ljybq3.jpg&quot; /&gt;&lt;/a&gt;
