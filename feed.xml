@@ -1,120 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/blogs/feed.xml" rel="self" type="application/atom+xml" /><link href="/blogs/" rel="alternate" type="text/html" /><updated>2026-05-27T13:57:57+00:00</updated><id>/blogs/</id><title type="html">ovac4u</title><entry><title type="html">Gidipex: building the AI-native African exchange</title><link href="/blogs/gidipex-building-the-ai-native-african-exchange" rel="alternate" type="text/html" title="Gidipex: building the AI-native African exchange" /><published>2026-05-26T03:50:00+00:00</published><updated>2026-05-26T03:50:00+00:00</updated><id>/blogs/gidipex-building-the-ai-native-african-exchange</id><content type="html" xml:base="/blogs/gidipex-building-the-ai-native-african-exchange">&lt;p&gt;I am the founder and CEO of Gidipex.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/blogs/feed.xml" rel="self" type="application/atom+xml" /><link href="/blogs/" rel="alternate" type="text/html" /><updated>2026-05-27T14:06:15+00:00</updated><id>/blogs/</id><title type="html">ovac4u</title><entry><title type="html">Why I’m building Gidipex</title><link href="/blogs/gidipex-building-the-ai-native-african-exchange" rel="alternate" type="text/html" title="Why I'm building Gidipex" /><published>2026-05-26T03:50:00+00:00</published><updated>2026-05-26T03:50:00+00:00</updated><id>/blogs/gidipex-building-the-ai-native-african-exchange</id><content type="html" xml:base="/blogs/gidipex-building-the-ai-native-african-exchange">&lt;p&gt;I’m Victor. I run Gidipex.&lt;/p&gt;
 
-&lt;p&gt;That sentence carries more weight for me than a title. It means the product is not just something I supervise. It is a thesis I have to keep proving in code, infrastructure, operations, design, compliance thinking, and customer experience.&lt;/p&gt;
+&lt;p&gt;Gidipex is a crypto exchange. Spot, futures, OTC, P2P, contests, and an AI assistant in the same window. You can use it from the web or by talking to it on WhatsApp.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://gidipex.com&quot;&gt;Gidipex&lt;/a&gt; is built around a clear idea: Africa does not need a thinner copy of someone else’s crypto exchange. It needs a trading and settlement system designed for the way African users actually move, pay, communicate, and make decisions.&lt;/p&gt;
+&lt;p&gt;Here’s what I’m actually doing, and why.&lt;/p&gt;
 
-&lt;p&gt;That is why Gidipex is not only a rate board.&lt;/p&gt;
+&lt;h2 id=&quot;most-exchanges-dont-fit-the-users-i-want-to-serve&quot;&gt;Most exchanges don’t fit the users I want to serve&lt;/h2&gt;
 
-&lt;p&gt;It is not only a buy-and-sell widget.&lt;/p&gt;
+&lt;p&gt;I’ve worked in payments and crypto since 2013. Started on Hubtel Mobile Money’s PHP client, then a stretch at PayPlux Ghana on the engineering side. The pattern is always the same: someone builds an exchange for a generic global user, then the local team gets asked to staple payment rails on afterwards.&lt;/p&gt;
 
-&lt;p&gt;It is not only a WhatsApp experiment.&lt;/p&gt;
+&lt;p&gt;That works until something breaks. Then you find out the support team has no visibility into the local rail, the KYC vendor doesn’t recognise the user’s ID format, and bank-transfer reconciliation turns out to be a spreadsheet someone in the back office rebuilds by hand.&lt;/p&gt;
 
-&lt;p&gt;The public site describes Gidipex as an AI-powered cryptocurrency exchange with spot, futures, OTC, and P2P markets accessible from web, WhatsApp, or chat. That is the shape of the product: execution, market intelligence, and regional settlement rails in one system.&lt;/p&gt;
+&lt;p&gt;I wanted to build it the other way around. Settlement first, exchange behind it.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-exchange-has-to-be-full-depth&quot;&gt;The exchange has to be full depth&lt;/h2&gt;
+&lt;h2 id=&quot;whats-actually-in-the-box&quot;&gt;What’s actually in the box&lt;/h2&gt;
 
-&lt;p&gt;One mistake people make when they hear “African crypto product” is assuming the market only needs a simple on-ramp.&lt;/p&gt;
-
-&lt;p&gt;On-ramps matter. Local fiat settlement matters. Mobile Money, bank transfer, card flows, P2P discovery, and local currency liquidity matter. But users do not stop evolving. A user who starts by buying USDT may later want spot markets. A trader who begins with swaps may want futures. A merchant who starts with one settlement route may need more corridors.&lt;/p&gt;
-
-&lt;p&gt;So Gidipex is built as a full exchange from the start.&lt;/p&gt;
-
-&lt;p&gt;The public site talks about spot liquidity, leveraged futures, OTC swaps, P2P bridge workflows, regional rails, and WhatsApp-assisted trading. Those are not separate slogans. They are parts of the same operating system.&lt;/p&gt;
-
-&lt;p&gt;The goal is to let a user move from simple conversion to more advanced execution without leaving the platform.&lt;/p&gt;
-
-&lt;p&gt;That matters because fragmented trading is expensive. If one app gives you rates, another handles P2P, another handles futures, another handles alerts, and another chat thread explains what just happened, the user is carrying the integration burden. Gidipex should carry that burden instead.&lt;/p&gt;
-
-&lt;h2 id=&quot;ai-is-not-the-product-it-is-the-interface-layer&quot;&gt;AI is not the product. It is the interface layer.&lt;/h2&gt;
-
-&lt;p&gt;Gidipex uses the phrase “Vibe Trading” publicly because the product is trying to close the gap between market information and action.&lt;/p&gt;
+&lt;p&gt;A full exchange. Spot pairs, leveraged futures, OTC desk, P2P settlement. Not a thin on-ramp that punts you to somewhere else once you’re past your first $100.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://play-lh.googleusercontent.com/pNAJc8tLWgCcL-iOU9ynIjZX91fEsKdxpVVMxKCQVCSPurLKb5m-UsCrSemSKqOwvlp5zTbiy6wsOz-2HIdYAB8=w1052-h592&quot; alt=&quot;Gidipex Android app command center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;But AI is not magic dust.&lt;/p&gt;
+&lt;p&gt;The AI piece — what shows up as “vibe trading” on the site — isn’t the product. The exchange is. The AI just makes it easier to talk to. It reads your portfolio, pulls a rate, walks you through opening a position, explains why a futures position got liquidated. It doesn’t trade for you. It isn’t a signals service.&lt;/p&gt;
 
-&lt;p&gt;AI is useful only when it is attached to real execution surfaces, real account state, real market data, and real risk boundaries. Otherwise it becomes commentary.&lt;/p&gt;
+&lt;p&gt;Mobile money corridors and local bank rails are first-class on the backend. So is the operator tooling. If a withdrawal sits, the person on support should be able to trace it across every hop without opening four dashboards.&lt;/p&gt;
 
-&lt;p&gt;The Gidipex AI layer is meant to help a user ask for prices, understand market context, receive alerts, inspect portfolio state, and move toward supported actions from the channels they already use. The public site highlights web, WhatsApp, and chat because the interface should meet the user where they are.&lt;/p&gt;
+&lt;h2 id=&quot;round-1-of-the-contest&quot;&gt;Round 1 of the contest&lt;/h2&gt;
 
-&lt;p&gt;This is especially important in African markets.&lt;/p&gt;
+&lt;p&gt;The first trading contest ran from late February to the end of April. 33 traders entered. 5 finished in payout positions. Top prize was $600 USDT. Total paid out, just over $1,300.&lt;/p&gt;
 
-&lt;p&gt;Many users live in messaging apps. They already negotiate, pay, support customers, send receipts, and manage business relationships there. A trading platform that ignores that behavior is forcing users into a colder workflow than necessary.&lt;/p&gt;
+&lt;p&gt;That’s small on purpose. The contest is there so a user can feel the platform before funding an account. Round 2 opens June 1 and runs for 30 days. Free entry is open at &lt;a href=&quot;https://gidipex.com/contests&quot;&gt;gidipex.com/contests&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;The AI layer should not replace the exchange. It should make the exchange easier to command.&lt;/p&gt;
+&lt;h2 id=&quot;what-im-not-pretending&quot;&gt;What I’m not pretending&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://play-lh.googleusercontent.com/ZPAn5Z4Fubw6J-KW6Q9fwIwr4UhqN-hC65qGf26b7FR53PkLnih1ZBTz2uuIWuSPO1lLutcCTDaYLSVASrVmcw=w1052-h592&quot; alt=&quot;Gidipex Android AI assistant&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We’re pre-launch in the paid-acquisition sense. The platform is live, but I’m not running ads yet. I’m not going to claim NGN withdrawals always clear in seconds, because Nigerian bank rails sometimes don’t. There are days where a withdrawal sits for an hour while the bank settles its end. I’d rather be plain about that than slap “instant” on a marketing page.&lt;/p&gt;
 
-&lt;h2 id=&quot;africa-needs-regional-rails-not-generic-checkout-buttons&quot;&gt;Africa needs regional rails, not generic checkout buttons&lt;/h2&gt;
+&lt;p&gt;Same for futures. Leverage can amputate an account in an afternoon. The product shows you your liquidation distance, your margin headroom, take-profit and stop-loss controls. It won’t nudge you into a bigger position than you can afford. The risk visibility is for the user, not for us.&lt;/p&gt;
 
-&lt;p&gt;The public Gidipex site is explicit about regional settlement: NGN, GHS, KES, ZAR, UGX, USD flows, P2P settlement, Mobile Money corridors, local banking rails, and Nigerian market pages.&lt;/p&gt;
+&lt;h2 id=&quot;where-im-going&quot;&gt;Where I’m going&lt;/h2&gt;
 
-&lt;p&gt;That is the real work.&lt;/p&gt;
+&lt;p&gt;Short version: an exchange where a Nigerian user — or Kenyan, or Ghanaian — doesn’t have to mentally translate between their bank, their phone, and their portfolio. The AI surface is the easy part. The boring infrastructure underneath is what decides whether this works.&lt;/p&gt;
 
-&lt;p&gt;Crypto exchanges often look global from the outside, but settlement is painfully local. A user in Lagos does not think about payments the same way a user in Accra or Nairobi does. Bank transfer behavior differs. Mobile Money behavior differs. Identity documents differ. Fraud patterns differ. Liquidity behavior differs. Support expectations differ.&lt;/p&gt;
+&lt;p&gt;Gidipex Limited is registered in Lagos. The team is here. The compliance work is happening here. None of that is decoration on a deck.&lt;/p&gt;
 
-&lt;p&gt;An exchange for Africa has to respect those differences.&lt;/p&gt;
+&lt;p&gt;If you trade, look around at &lt;a href=&quot;https://gidipex.com&quot;&gt;gidipex.com&lt;/a&gt;. Round 2 of the contest is live. Free entry.&lt;/p&gt;
 
-&lt;p&gt;That means building around corridors, not just coins.&lt;/p&gt;
-
-&lt;p&gt;It means pricing and liquidity cannot be separated from local payment habits.&lt;/p&gt;
-
-&lt;p&gt;It means compliance cannot be pasted on at the end.&lt;/p&gt;
-
-&lt;p&gt;It means the support team needs operational clarity, not just a dashboard full of numbers.&lt;/p&gt;
-
-&lt;p&gt;It means every transaction should be traceable enough for a human operator to understand what happened when the happy path breaks.&lt;/p&gt;
-
-&lt;p&gt;This is why I think of Gidipex as infrastructure before I think of it as an app.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-nigerian-focus-is-intentional&quot;&gt;The Nigerian focus is intentional&lt;/h2&gt;
-
-&lt;p&gt;Gidipex Limited is a Nigerian company. The investor page publicly lists the company as headquartered in Lekki Phase 1, Lagos, and states that I founded it in 2024.&lt;/p&gt;
-
-&lt;p&gt;That matters because Nigeria is not just another target market. It is one of the most demanding crypto markets in the world.&lt;/p&gt;
-
-&lt;p&gt;Nigerian users are sophisticated, impatient in the right way, and deeply familiar with financial workarounds. They know when a product is slow. They know when pricing is bad. They know when settlement is unreliable. They know when a platform is pretending to understand local constraints.&lt;/p&gt;
-
-&lt;p&gt;Building for Nigeria forces discipline.&lt;/p&gt;
-
-&lt;p&gt;If Gidipex can serve Nigerian users with clear NGN workflows, local market discovery, OTC rates, P2P surfaces, futures risk context, and AI-assisted execution, the product gets stronger for the rest of the continent.&lt;/p&gt;
-
-&lt;p&gt;That is why the site does not hide the Lagos identity.&lt;/p&gt;
-
-&lt;h2 id=&quot;risk-has-to-stay-close-to-the-product&quot;&gt;Risk has to stay close to the product&lt;/h2&gt;
-
-&lt;p&gt;Gidipex supports advanced trading concepts where available, including futures and leverage. That means risk cannot be hidden in a footer and forgotten.&lt;/p&gt;
-
-&lt;p&gt;The public futures page says the quiet part clearly: futures trading can create rapid losses, liquidation risk is real, and AI output is not financial advice.&lt;/p&gt;
-
-&lt;p&gt;That posture is important to me.&lt;/p&gt;
-
-&lt;p&gt;If a platform gives users powerful tools, it should also give them context. Leverage and margin displays, take-profit and stop-loss workflows, liquidation visibility, eligibility checks, and risk warnings are part of the product. They are not legal decorations.&lt;/p&gt;
-
-&lt;p&gt;The best trading products respect the user’s ambition without flattering them into carelessness.&lt;/p&gt;
-
-&lt;p&gt;That is the balance Gidipex has to keep.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-founder-thesis&quot;&gt;The founder thesis&lt;/h2&gt;
-
-&lt;p&gt;My thesis for Gidipex is simple:&lt;/p&gt;
-
-&lt;p&gt;Africa’s next major exchange will not win by copying a global exchange and translating the buttons.&lt;/p&gt;
-
-&lt;p&gt;It will win by combining serious trading infrastructure with local settlement, AI-native interaction, and operational discipline built for the continent.&lt;/p&gt;
-
-&lt;p&gt;That means full depth: spot, OTC, P2P, futures, wallet flows, regional rails, compliance direction, support tooling, developer surfaces, and a conversational layer that can make all of it easier to use.&lt;/p&gt;
-
-&lt;p&gt;It also means the company has to be honest about what it is building. Gidipex provides infrastructure, market data, and AI-assisted analysis. It is not financial advice. Digital asset trading is risky. Futures are riskier. Users need clarity, not hype.&lt;/p&gt;
-
-&lt;p&gt;The ambition is still large.&lt;/p&gt;
-
-&lt;p&gt;I want Gidipex to become the exchange where African users can move from local money to digital markets without feeling like they are borrowing someone else’s financial operating system.&lt;/p&gt;
-
-&lt;p&gt;That is the work.&lt;/p&gt;
-
-&lt;p&gt;Website: &lt;a href=&quot;https://gidipex.com&quot;&gt;gidipex.com&lt;/a&gt;&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="tech" /><summary type="html">I am the founder and CEO of Gidipex.</summary></entry><entry><title type="html">Bitnormous: building the crypto desk people can trust</title><link href="/blogs/bitnormous-building-the-crypto-desk-people-can-trust" rel="alternate" type="text/html" title="Bitnormous: building the crypto desk people can trust" /><published>2026-05-26T03:40:00+00:00</published><updated>2026-05-26T03:40:00+00:00</updated><id>/blogs/bitnormous-building-the-crypto-desk-people-can-trust</id><content type="html" xml:base="/blogs/bitnormous-building-the-crypto-desk-people-can-trust">&lt;p&gt;I am a co-founder at Bitnormous, and the work has always felt grounded in a practical promise.&lt;/p&gt;
+&lt;p&gt;— Victor&lt;/p&gt;</content><author><name>Victor Ariama</name></author><category term="tech" /><summary type="html">I’m Victor. I run Gidipex.</summary></entry><entry><title type="html">Bitnormous: building the crypto desk people can trust</title><link href="/blogs/bitnormous-building-the-crypto-desk-people-can-trust" rel="alternate" type="text/html" title="Bitnormous: building the crypto desk people can trust" /><published>2026-05-26T03:40:00+00:00</published><updated>2026-05-26T03:40:00+00:00</updated><id>/blogs/bitnormous-building-the-crypto-desk-people-can-trust</id><content type="html" xml:base="/blogs/bitnormous-building-the-crypto-desk-people-can-trust">&lt;p&gt;I am a co-founder at Bitnormous, and the work has always felt grounded in a practical promise.&lt;/p&gt;
 
 &lt;p&gt;Crypto can be complex. The underlying networks, wallet formats, settlement routes, risk controls, and market prices can all become intimidating very quickly. But the user who wants to buy Bitcoin, sell USDT, or convert digital value into cash is often asking a direct question:&lt;/p&gt;
 
