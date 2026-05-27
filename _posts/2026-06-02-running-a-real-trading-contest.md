@@ -11,10 +11,8 @@ subclass: 'post tag-tech'
 author: ovac4u
 ---
 
-Round 2 of the [Gidipex Vibe Trading Challenge](https://gidipex.com/contests) opened yesterday. The round runs through June 30. Free entry is available.
+Round 2 of the Gidipex trading contest opened yesterday. 30-day round. Free entry option.
 
-For context, Round 1 ran from late February to the end of April. Thirty-three traders entered. Five finished in payout positions and received USDT. The top prize was six hundred USDT.
-
-If you trade, the seat is open.
+Round 1 numbers: 33 traders entered, 5 got paid, top prize was $600 USDT.
 
 [gidipex.com/contests](https://gidipex.com/contests)
