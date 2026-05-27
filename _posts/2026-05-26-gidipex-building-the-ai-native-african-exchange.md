@@ -37,7 +37,7 @@ Mobile money corridors and local bank rails are first-class on the backend, with
 
 ## What you get
 
-NGN in and out on local rails — no offshore wire, no SWIFT detour, no waiting on a foreign bank. Spot pairs on the majors. Leveraged futures with the risk controls in the same view as the position: liquidation distance, margin headroom, take-profit and stop-loss, all before you click. OTC desk for size the order book can't absorb. P2P routes for corridors where peer settlement is the cleanest path.
+Local-currency deposits and withdrawals on local rails — no offshore wire, no SWIFT detour, no waiting on a foreign bank. Every market we serve, on the rails users already use. Spot pairs on the majors. Leveraged futures with the risk controls in the same view as the position: liquidation distance, margin headroom, take-profit and stop-loss, all before you click. OTC desk for size the order book can't absorb. P2P routes for corridors where peer settlement is the cleanest path.
 
 Trading contests with real USDT prizes. Round 1 ran from late February to the end of April: 33 traders entered, 5 paid out, top prize was $600 USDT, just over $1,300 total. Round 2 is live now. Free entry. Runs through June 30.
 
