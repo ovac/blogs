@@ -13,6 +13,6 @@ author: ovac4u
 
 Round 2 of the Gidipex trading contest opened yesterday. 30-day round. Free entry option.
 
-Round 1 numbers: 33 traders entered, 5 got paid, top prize was $600 USDT.
+For context, Round 1 ran from late February to the end of April. Thirty-three traders entered. Five finished in payout positions and received USDT. The top prize was six hundred USDT.
 
 [gidipex.com/contests](https://gidipex.com/contests)
