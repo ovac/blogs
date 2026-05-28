@@ -39,7 +39,7 @@ Mobile money corridors and local bank rails are first-class on the backend, with
 
 Local-currency deposits and withdrawals on local rails — no offshore wire, no SWIFT detour, no waiting on a foreign bank. Every market we serve, on the rails users already use. Spot pairs on the majors. Leveraged futures with the risk controls in the same view as the position: liquidation distance, margin headroom, take-profit and stop-loss, all before you click. OTC desk for size the order book can't absorb. P2P routes for corridors where peer settlement is the cleanest path.
 
-Trading contests with real USDT prizes. Round 1 ran from late February to the end of April: 33 traders entered, 5 paid out, top prize was $600 USDT, just over $1,300 total. Round 2 is live now. Free entry. Runs through June 30.
+Trading contests with real USDT prizes. Round 1 ran from late February to the end of April: 17 traders entered, 3 paid out, top prize was $1,200 USDT, $2,000 total pool. Round 2 is live now. Free entry. Runs through June 30.
 
 ## Where I'm going
 
