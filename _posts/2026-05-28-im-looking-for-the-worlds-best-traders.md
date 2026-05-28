@@ -17,7 +17,7 @@ The pipelines that pick pro traders today only look in a few cities. New York. L
 
 Gidipex is what I'm building to fix that.
 
-The platform is a full crypto exchange. Spot, futures, OTC, P2P, an AI you can talk to from WhatsApp or the web. That's the product. Real money trading for people who already know what they're doing.
+The platform is a full crypto exchange. Futures, OTC, P2P, an AI you can talk to from WhatsApp or the web. That's the product. Real money trading for people who already know what they're doing.
 
 On top of that we run trading contests. You get a simulated balance. You trade live markets against everyone else on the leaderboard. Zero deposit, zero personal risk, real prize pool at the end. The point isn't the prize. The point is the leaderboard.
 
