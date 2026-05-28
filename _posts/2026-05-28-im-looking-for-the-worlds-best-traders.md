@@ -23,7 +23,7 @@ On top of that we run trading contests. You get a simulated balance. You trade l
 
 If you can finish at the top of a public leaderboard, in a real market, against real humans, with a strategy that holds up over a full round, that's the kind of track record we can take to sponsors. We're going to take the top of that board and put them on physical tournaments. Sponsorship deals. Cash pools that scale up.
 
-Round 1 ran from late February to end of April. 33 entries. 5 payouts. $600 top prize. Small numbers because the round was small. The next ones won't be.
+Round 1 ran from late February to end of April. 17 entries. 3 payouts split a $2,000 USDT pool, with $1,200 to first. Small numbers because the round was small. The next ones won't be.
 
 If you can trade, sign up at [gidipex.com/contests](https://gidipex.com/contests) and use my referral code `ovac4u` for some goodies on the side.
 
